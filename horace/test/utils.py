@@ -58,7 +58,7 @@ class ParagraphSectionModule(Module):
 
 class CSSTestPage(Page):
     url = html_fixture_url
-    _title = 'Horace Test Page'
+    title = 'Horace Test Page'
 
     _content = {
         'paragraphSection': {
@@ -80,7 +80,7 @@ class CSSTestPage(Page):
 
 class CSSTestPageWithMissingRequiredElements(Page):
     url = html_fixture_url
-    _title = 'Horace Test Page'
+    title = 'Horace Test Page'
 
     _content = {
         'hardbreaks': {
@@ -95,7 +95,7 @@ class CSSTestPageWithMissingRequiredElements(Page):
 
 class UnknownTestPage(Page):
     url = 'must404.html'
-    _title = 'unknown'
+    title = 'unknown'
 
     def __init__(self, driver):
         super(UnknownTestPage, self).__init__(driver)
@@ -103,7 +103,7 @@ class UnknownTestPage(Page):
 
 class DuckDuckGoPage(Page):
     url = 'http://duckduckgo.com/'
-    _title = 'DuckDuckGo'
+    title = 'DuckDuckGo'
 
     def __init__(self, driver):
         super(DuckDuckGoPage, self).__init__(driver)

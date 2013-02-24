@@ -16,7 +16,7 @@ class TestAgent(TestObject):
         agent = Agent(self.driver)
         agent.to(DuckDuckGoPage)
         agent.at(DuckDuckGoPage)
-        self.assertTrue(DuckDuckGoPage.title, self.driver.title)
+        self.assertEquals(DuckDuckGoPage.title, self.driver.title)
 
     def test_at_raises_exception_if_not_at_correct_page(self):
         agent = Agent(self.driver)
