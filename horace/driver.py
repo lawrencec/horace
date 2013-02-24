@@ -25,7 +25,7 @@ class Driver(object):
             self._driver = webdriver.Remote(
                 command_executor="http://localhost:8910/wd/hub",
                 desired_capabilities={
-                    'takeScreenshot': False,
+                    'takesScreenshot': False,
                     'javascriptEnabled': True
                 })
 

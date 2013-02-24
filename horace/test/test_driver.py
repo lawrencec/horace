@@ -17,6 +17,13 @@ class TestDriver(TestCase):
     #     self.assertIsInstance(d._driver, Firefox)
     #     d.close()
 
+    def test_capabilities(self):
+        d = Driver()
+        self.assertTrue(d._driver)
+        capabilities = d._driver.capabilities
+        self.assertFalse(capabilities['takesScreenshot'])
+        self.assertTrue(capabilities['javascriptEnabled'])
+
     def test_passthrough(self):
         d = Driver()
         self.assertIsInstance(d._driver, Remote)
