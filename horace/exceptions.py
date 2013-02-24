@@ -7,8 +7,8 @@ class NotAtPageException(Exception):
 
 class ElementNotFoundException(Exception):
 
-    def __init__(self):
-        self.message = 'Element not found'
+    def __init__(self, selector):
+        self.message = 'Element not found (%s)' % selector
 
     def __str__(self):
         return repr(self.message)

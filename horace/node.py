@@ -50,5 +50,5 @@ class Node(object):
 
         element = container.find_elements_by_css_selector(selector)
         if required and len(element) == 0:
-            raise ElementNotFoundException()
+            raise ElementNotFoundException(selector)
         return element

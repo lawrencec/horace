@@ -41,11 +41,6 @@ class TestAgent(TestObject):
         agent.toAt(DuckDuckGoPage)
         self.assertIsInstance(agent.page, DuckDuckGoPage)
 
-    def test_close(self):
-        agent = Agent(self.driver)
-        agent.close()
-        self.assertEqual(len(agent._driver.window_handles), 0)
-
     def test_get_attribute(self):
         agent = Agent(self.driver)
         try:
@@ -55,6 +50,3 @@ class TestAgent(TestObject):
                 "'Agent' object has no attribute 'foo'",
                 e.message
             )
-
-
-

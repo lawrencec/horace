@@ -28,7 +28,7 @@ class Element(object):
         try:
             result = self._element.find_elements_by_xpath('..')
         except InvalidSelectorException:
-            raise ElementNotFoundException
+            raise ElementNotFoundException('..')
         return Element(result[0])
 
     @property

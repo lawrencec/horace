@@ -76,7 +76,7 @@ class TestElement(TestObject):
         try:
             element.parent()
         except ElementNotFoundException, e:
-            self.assertEquals(e.message, 'Element not found')
+            self.assertEquals(e.message, 'Element not found (..)')
 
     def test_find_by_css_selector(self):
         webElement = self._findBySelector('html')

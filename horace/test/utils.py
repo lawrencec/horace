@@ -16,18 +16,26 @@ drivers = {
 class TestObject(TestCase):
     driver = None
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         caps = {
             'takeScreenshot': False,
             'javascriptEnabled': True
         }
         if config.driver in drivers:
-            self.driver = drivers[config.driver]()
+            cls.driver = drivers[config.driver]()
         else:
-            self.driver = webdriver.Remote(
+            cls.driver = webdriver.Remote(
                 command_executor="http://localhost:8910/wd/hub",
                 desired_capabilities=caps)
 
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.close()
+        cls.driver = None
+
+    def setUp(self):
+        self.driver = self.__class__.driver
         self.driver.get(config.html_fixture_url)
 
     def tearDown(self):

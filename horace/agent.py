@@ -32,8 +32,8 @@ class Agent(object):
         self.to(Page)
         self.at(Page)
 
-    # def drive(self):
-    #     pass
+    def drive(self):
+        pass
 
     def close(self):
         self._driver.close()

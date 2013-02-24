@@ -21,7 +21,7 @@ class TestPageObject(TestObject):
             self.fail("Didn't raise Exception")
         except ElementNotFoundException, e:
             self.assertEquals(
-                'Element not found',
+                'Element not found (br)',
                 e.message
             )
 
