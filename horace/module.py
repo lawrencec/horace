@@ -8,6 +8,8 @@ class Module(Node):
 
     def __init__(self, driver, config=None):
         self._config = config
+        if config and 'selector' in self._config:
+            self.base = self._config['selector']
         super(Module, self).__init__(driver)
 
     def initializeContent(self):

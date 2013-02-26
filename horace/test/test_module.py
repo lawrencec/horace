@@ -13,5 +13,11 @@ class TestModule(TestObject):
 
     def test_content(self):
         webModule = ParagraphSectionModule(self.driver)
-        self.assertTrue(len(webModule.paragraphs), 2)
+        self.assertEqual(len(webModule.paragraphs), 2)
         self.assertEqual(webModule.paragraphs[1].id, 'second')
+
+    def test_content_with_custom_base_selector(self):
+        webModule = ParagraphSectionModule(self.driver, {
+            'selector': '#formSection'
+        })
+        self.assertEqual(len(webModule.paragraphs), 9)
