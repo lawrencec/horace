@@ -1,8 +1,8 @@
-from node import Node
+from contentNode import ContentNode
 from horace.element import Element
 
 
-class Module(Node):
+class Module(ContentNode):
     base = None
     required = True
 

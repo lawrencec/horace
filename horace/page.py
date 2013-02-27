@@ -1,7 +1,7 @@
-from horace.node import Node
+from horace.contentNode import ContentNode
 
 
-class Page(Node):
+class Page(ContentNode):
     url = None
     title = None
 

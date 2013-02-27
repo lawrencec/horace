@@ -2,7 +2,7 @@ from horace.elements import Elements
 from horace.exceptions import ElementNotFoundException
 
 
-class Node(object):
+class ContentNode(object):
     _content = {}
     _content_instances = {}
 
