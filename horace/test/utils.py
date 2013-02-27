@@ -13,6 +13,26 @@ drivers = {
 }
 
 
+def contentElement(selector=None, required=True):
+    if not selector:
+        raise Exception('selector required')
+    return {
+        'selector': selector,
+        'required': required
+    }
+
+
+def contentModule(module=None, selector=None, required=True):
+    if not module:
+        raise Exception('selector or module required')
+
+    return {
+        'module': module,
+        'required': required,
+        'selector': selector
+    }
+
+
 class TestObject(TestCase):
     driver = None
 
@@ -54,10 +74,7 @@ class ParagraphSectionModule(Module):
     required = True
 
     _content = {
-        'paragraphs': {
-            'selector': 'p',
-            'required': False
-        }
+        'paragraphs': contentElement(selector='p', required=False)
     }
 
 
@@ -66,11 +83,11 @@ class CSSTestPage(Page):
     title = 'Horace Test Page'
 
     _content = {
-        'paragraphSection': {
-            'module': ParagraphSectionModule,
-            'required': True
-        },
-        'headingTwos': {'selector': 'h2'}
+        'paragraphSection': contentModule(
+            module=ParagraphSectionModule,
+            required=True
+        ),
+        'headingTwos': contentElement(selector='h2')
     }
 
     # Setting properties via the @property decorator is purely optional but it
@@ -85,10 +102,7 @@ class CSSTestPageWithMissingRequiredElements(Page):
     title = 'Horace Test Page'
 
     _content = {
-        'hardbreaks': {
-            'selector': 'br',
-            'required': True
-        }
+        'hardbreaks': contentElement(selector='br', required=True)
     }
 
 

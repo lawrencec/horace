@@ -33,11 +33,12 @@ class Node(object):
     def initializeContent(self):
         for contentItemName in self._content:
             contentItem = self._content[contentItemName]
-            if 'module' in contentItem:
+
+            if 'module' in contentItem and contentItem['module'] is not None:
                 moduleClass = self._content[contentItemName]['module']
                 del self._content[contentItemName]['module']
                 self.initializeModule(moduleClass, contentItemName, contentItem)
-            elif 'selector' in contentItem:
+            elif 'selector' in contentItem and contentItem['selector'] is not None:
                 required = self._content[contentItemName]['required'] \
                     if 'required' in self._content[contentItemName] else True
                 self.initializeElement(contentItemName, required)
