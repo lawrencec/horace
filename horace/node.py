@@ -1,6 +1,7 @@
 from horace.elements import Elements
 from horace.exceptions import ElementNotFoundException
 
+
 class Node(object):
     _content = {}
     _content_instances = {}
@@ -21,28 +22,25 @@ class Node(object):
     def _getContent(self, name):
         return self._content_instances[name]
 
-    def initializeModule(self, key):
-        moduleClass = self._content[key]['base']
-        content = moduleClass(self._driver, self._content[key])
-        self._content_instances[key] = content
-
-    def initializeElement(self, key, required=True):
+    def initializeElement(self, contentItemName, required=True):
         element = self.getElementBySelector(
-            self._content[key]['selector'],
+            self._content[contentItemName]['selector'],
             required=required
         )
         if element is not None:
-            self._content_instances[key] = Elements(element)
+            self._content_instances[contentItemName] = Elements(element)
 
     def initializeContent(self):
-        for key in self._content:
-            kv = self._content[key]
-            if 'base' in kv:
-                self.initializeModule(key)
-            elif 'selector' in kv:
-                required = self._content[key]['required'] \
-                    if 'required' in self._content[key] else True
-                self.initializeElement(key, required)
+        for contentItemName in self._content:
+            contentItem = self._content[contentItemName]
+            if 'module' in contentItem:
+                moduleClass = self._content[contentItemName]['module']
+                del self._content[contentItemName]['module']
+                self.initializeModule(moduleClass, contentItemName, contentItem)
+            elif 'selector' in contentItem:
+                required = self._content[contentItemName]['required'] \
+                    if 'required' in self._content[contentItemName] else True
+                self.initializeElement(contentItemName, required)
 
     def getElementBySelector(self, selector, container=None, required=True):
         if container is None:

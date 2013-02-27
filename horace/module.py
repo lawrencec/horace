@@ -6,10 +6,9 @@ class Module(Node):
     base = None
     required = True
 
-    def __init__(self, driver, config=None):
-        self._config = config
-        if config and 'selector' in self._config:
-            self.base = self._config['selector']
+    def __init__(self, driver, selector=None, required=True):
+        self.required = required
+        self.base = selector if selector else self.base
         super(Module, self).__init__(driver)
 
     def initializeContent(self):

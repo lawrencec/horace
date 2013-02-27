@@ -60,9 +60,6 @@ class ParagraphSectionModule(Module):
         }
     }
 
-    def __init__(self, driver, config=None):
-        super(ParagraphSectionModule, self).__init__(driver, config)
-
 
 class CSSTestPage(Page):
     url = html_fixture_url
@@ -70,14 +67,11 @@ class CSSTestPage(Page):
 
     _content = {
         'paragraphSection': {
-            'base': ParagraphSectionModule,
+            'module': ParagraphSectionModule,
             'required': True
         },
         'headingTwos': {'selector': 'h2'}
     }
-
-    def __init__(self, driver):
-        super(CSSTestPage, self).__init__(driver)
 
     # Setting properties via the @property decorator is purely optional but it
     # helps in providing code assistance in IDES or python console
@@ -97,21 +91,12 @@ class CSSTestPageWithMissingRequiredElements(Page):
         }
     }
 
-    def __init__(self, driver):
-        super(CSSTestPageWithMissingRequiredElements, self).__init__(driver)
-
 
 class UnknownTestPage(Page):
     url = 'must404.html'
     title = 'unknown'
 
-    def __init__(self, driver):
-        super(UnknownTestPage, self).__init__(driver)
-
 
 class DuckDuckGoPage(Page):
     url = 'http://duckduckgo.com/'
     title = 'DuckDuckGo'
-
-    def __init__(self, driver):
-        super(DuckDuckGoPage, self).__init__(driver)
