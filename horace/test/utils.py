@@ -1,5 +1,6 @@
 from unittest import TestCase
 from selenium import webdriver
+from horace.contentNode import contentModule, contentElement
 from horace.page import Page
 from horace.module import Module
 from config import html_fixture_url
@@ -11,26 +12,6 @@ drivers = {
     'firefox': webdriver.Firefox,
     'chrome': webdriver.Chrome
 }
-
-
-def contentElement(selector=None, required=True):
-    if not selector:
-        raise Exception('selector required')
-    return {
-        'selector': selector,
-        'required': required
-    }
-
-
-def contentModule(module=None, selector=None, required=True):
-    if not module:
-        raise Exception('selector or module required')
-
-    return {
-        'module': module,
-        'required': required,
-        'selector': selector
-    }
 
 
 class TestObject(TestCase):

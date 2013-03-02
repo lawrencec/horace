@@ -3,11 +3,10 @@ from horace.exceptions import ElementNotFoundException
 
 
 class ContentNode(object):
-    _content = {}
-    _content_instances = {}
 
     def __init__(self, driver):
         self._driver = driver
+        self._content_instances = {}
         try:
             self.initializeContent()
         except Exception, e:
@@ -31,16 +30,19 @@ class ContentNode(object):
             self._content_instances[contentItemName] = Elements(element)
 
     def initializeContent(self):
+        content = self._content
         for contentItemName in self._content:
-            contentItem = self._content[contentItemName]
+            contentItem = content[contentItemName]
 
             if 'module' in contentItem and contentItem['module'] is not None:
-                moduleClass = self._content[contentItemName]['module']
-                del self._content[contentItemName]['module']
-                self.initializeModule(moduleClass, contentItemName, contentItem)
-            elif 'selector' in contentItem and contentItem['selector'] is not None:
-                required = self._content[contentItemName]['required'] \
-                    if 'required' in self._content[contentItemName] else True
+                moduleClass = content[contentItemName]['module']
+                moduleArgs = {key: value for key, value in contentItem.items()
+                              if key is not 'module'}
+                self.initializeModule(moduleClass, contentItemName, moduleArgs)
+            elif 'selector' in contentItem and contentItem['selector'] \
+                    is not None:
+                required = content[contentItemName]['required'] \
+                    if 'required' in content[contentItemName] else True
                 self.initializeElement(contentItemName, required)
 
     def getElementBySelector(self, selector, container=None, required=True):
@@ -51,3 +53,23 @@ class ContentNode(object):
         if required and len(element) == 0:
             raise ElementNotFoundException(selector)
         return element
+
+
+def contentElement(selector=None, required=True):
+    if not selector:
+        raise Exception('selector required')
+    return {
+        'selector': selector,
+        'required': required
+    }
+
+
+def contentModule(module=None, selector=None, required=True):
+    if not module:
+        raise Exception('selector or module required')
+
+    return {
+        'module': module,
+        'required': required,
+        'selector': selector
+    }

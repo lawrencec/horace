@@ -6,14 +6,16 @@ from horace.exceptions import ElementNotFoundException
 class TestPageObject(TestObject):
     driver = None
 
-    def test_page_title(self):
-        webPage = CSSTestPage(self.driver)
-        self.assertEquals(webPage.title, 'Horace Test Page')
-
     def test_page_modules(self):
         webPage = CSSTestPage(self.driver)
         self.assertIsNotNone(webPage.paragraphSection)
         self.assertEquals(len(webPage.paragraphSection.paragraphs), 2)
+        self.assertFalse('paragraphs' in webPage._content_instances)
+        self.assertEquals(len(webPage._content_instances), 2)
+
+    def test_page_title(self):
+        webPage = CSSTestPage(self.driver)
+        self.assertEquals(webPage.title, 'Horace Test Page')
 
     def test_page_with_required_elements_throws_exception(self):
         try:
