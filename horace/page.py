@@ -13,6 +13,9 @@ class Page(ContentNode):
         content = moduleClass(self._driver, **configuration)
         self._content_instances[module_name] = content
 
+    def at(self, title):
+        return title == self.title
+
     @property
     def url(self):
         return self.url

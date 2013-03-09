@@ -19,7 +19,7 @@ class Agent(object):
     def at(self, Page):
         self._currentPage = Page(self._driver)
         title = self._driver.title
-        if title != self._currentPage.title:
+        if not self._currentPage.at(title):
             raise NotAtPageException(self._currentPage.title, title)
 
     def toAt(self, Page):
