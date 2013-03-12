@@ -11,7 +11,7 @@ class TestPageObject(TestObject):
         self.assertIsNotNone(webPage.paragraphSection)
         self.assertEquals(len(webPage.paragraphSection.paragraphs), 2)
         self.assertFalse('paragraphs' in webPage._content_instances)
-        self.assertEquals(len(webPage._content_instances), 2)
+        self.assertEquals(len(webPage._content_instances), 3)
 
     def test_page_title(self):
         webPage = CSSTestPage(self.driver)
@@ -30,7 +30,7 @@ class TestPageObject(TestObject):
     def test_page_elements(self):
         webPage = CSSTestPage(self.driver)
         self.assertIsNotNone(webPage.headingTwos)
-        self.assertEqual(len(webPage.headingTwos), 8)
+        self.assertEqual(len(webPage.headingTwos), 9)
 
     def test_get_attribute(self):
         webPage = CSSTestPage(self.driver)
@@ -41,3 +41,11 @@ class TestPageObject(TestObject):
                 "'CSSTestPage' object has no attribute 'foo'",
                 e.message
             )
+
+    def test_iframe_element(self):
+        webPage = CSSTestPage(self.driver)
+        self.assertIsNotNone(webPage.anIFrame)
+        webPage.toFrame(webPage.anIFrame)
+        self.assertEqual(len(webPage.getElementBySelector('h2')), 1)
+        webPage.toDefaultContent()
+        self.assertEqual(len(webPage.headingTwos), 9)

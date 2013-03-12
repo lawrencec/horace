@@ -25,6 +25,16 @@ class Module(ContentNode):
             required
         )
 
+    def toFrame(self):
+        self._driver.switch_to_frame(self._baseNode.id)
+
+    def toDefaultContent(self):
+        self._driver.switch_to_default_content()
+
+    @property
+    def id(self):
+        return self._baseNode._element.id
+
     @property
     def text(self):
         return self._baseNode.text

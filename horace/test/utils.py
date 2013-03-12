@@ -49,6 +49,13 @@ class TestObject(TestCase):
             result = parent.find_element_by_css_selector(selector)
         return result
 
+    def _findAllBySelector(self, selector, parent=None):
+        if parent is None:
+            result = self.driver.find_elements_by_css_selector(selector)
+        else:
+            result = parent.find_elements_by_css_selector(selector)
+        return result
+
 
 class ParagraphSectionModule(Module):
     base = '#paragraphsSection'
@@ -56,6 +63,13 @@ class ParagraphSectionModule(Module):
 
     _content = {
         'paragraphs': contentElement(selector='p', required=False)
+    }
+
+
+class IFrame(Module):
+    base = '#anIFrame'
+    _content = {
+        # 'headingTwos': contentElement(selector='h2')
     }
 
 
@@ -68,7 +82,8 @@ class CSSTestPage(Page):
             module=ParagraphSectionModule,
             required=True
         ),
-        'headingTwos': contentElement(selector='h2')
+        'headingTwos': contentElement(selector='h2'),
+        'anIFrame': contentModule(module=IFrame)
     }
 
     # Setting properties via the @property decorator is purely optional but it
@@ -76,6 +91,7 @@ class CSSTestPage(Page):
     # @property
     # def paragraphSection(self):
     #     return self._getContent('paragraphSection')
+
 
 
 class CSSTestPageWithMissingRequiredElements(Page):

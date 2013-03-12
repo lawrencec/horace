@@ -16,6 +16,12 @@ class Page(ContentNode):
     def at(self, title):
         return title == self.title
 
+    def toFrame(self, frame):
+        self._driver.switch_to_frame(frame._baseNode.id)
+
+    def toDefaultContent(self):
+        self._driver.switch_to_default_content()
+
     @property
     def url(self):
         return self.url
