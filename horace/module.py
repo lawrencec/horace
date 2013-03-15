@@ -1,5 +1,6 @@
 from contentNode import ContentNode
 from horace.element import Element
+from horace.exceptions import ElementNotFoundException
 
 
 class Module(ContentNode):
@@ -19,11 +20,23 @@ class Module(ContentNode):
         super(Module, self).initializeContent()
 
     def getElementBySelector(self, selector, container=None, required=True):
-        return super(Module, self).getElementBySelector(
-            selector,
-            self._baseNode._element,
-            required
+
+        if self._baseNode.tag_name == 'iframe':
+            self.toFrame()
+            element = self._driver.find_elements_by_css_selector(selector)
+            if required and len(element) == 0:
+                raise ElementNotFoundException(selector)
+            return element
+        else:
+            self.toDefaultContent()
+            return super(Module, self).getElementBySelector(
+                selector,
+                self._baseNode._element,
+                required
         )
+
+    def getBaseElement(self):
+        return self._baseNode
 
     def toFrame(self):
         self._driver.switch_to_frame(self._baseNode.id)

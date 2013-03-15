@@ -45,7 +45,6 @@ class TestPageObject(TestObject):
     def test_iframe_element(self):
         webPage = CSSTestPage(self.driver)
         self.assertIsNotNone(webPage.anIFrame)
-        webPage.toFrame(webPage.anIFrame)
-        self.assertEqual(len(webPage.getElementBySelector('h2')), 1)
-        webPage.toDefaultContent()
+        self.assertEqual(len(webPage.anIFrame.getElementBySelector('h2')), 1)
+        self.assertEqual(len(webPage.anIFrame.headingTwos), 1)
         self.assertEqual(len(webPage.headingTwos), 9)

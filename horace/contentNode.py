@@ -46,6 +46,7 @@ class ContentNode(object):
                 self.initializeElement(contentItemName, required)
 
     def getElementBySelector(self, selector, container=None, required=True):
+        self._driver.switch_to_default_content()
         if container is None:
             container = self._driver
 

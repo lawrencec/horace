@@ -68,8 +68,9 @@ class ParagraphSectionModule(Module):
 
 class IFrame(Module):
     base = '#anIFrame'
+
     _content = {
-        # 'headingTwos': contentElement(selector='h2')
+        'headingTwos': contentElement(selector='h2')
     }
 
 
