@@ -1,6 +1,6 @@
 from unittest import TestCase
 from selenium import webdriver
-from horace.contentNode import contentModule, contentModuleList, contentElement
+from horace.contentNode import content_module, content_module_list, element
 from horace.page import Page
 from horace.module import Module
 from config import html_fixture_url
@@ -58,34 +58,34 @@ class TestObject(TestCase):
 
 
 class ParagraphSectionModule(Module):
-    base = '#paragraphsSection'
+    baseSelector = '#paragraphsSection'
     required = True
 
     _content = {
-        'paragraphs': contentElement(selector='p', required=False)
+        'paragraphs': element(selector='p', required=False)
     }
 
 
 class TableRowModule(Module):
     _content = {
-        'data': contentElement(selector='td', required=False)
+        'data': element(selector='td', required=False)
     }
 
 
 class TableModule(Module):
-    base = 'table'
+    baseSelector = 'table'
     required = True
 
     _content = {
-        'rows': contentModuleList(module=TableRowModule, selector='tr')
+        'rows': content_module_list(module=TableRowModule, selector='tr')
     }
 
 
 class IFrame(Module):
-    base = '#anIFrame'
+    baseSelector = '#anIFrame'
 
     _content = {
-        'headingTwos': contentElement(selector='h2')
+        'headingTwos': element(selector='h2')
     }
 
 
@@ -94,13 +94,13 @@ class CSSTestPage(Page):
     title = 'Horace Test Page'
 
     _content = {
-        'paragraphSection': contentModule(
+        'paragraphSection': content_module(
             module=ParagraphSectionModule,
             required=True
         ),
-        'headingTwos': contentElement(selector='h2'),
-        'anIFrame': contentModule(module=IFrame),
-        'table': contentModule(module=TableModule)
+        'headingTwos': element(selector='h2'),
+        'anIFrame': content_module(module=IFrame),
+        'table': content_module(module=TableModule)
     }
 
     # Setting properties via the @property decorator is purely optional but it
@@ -116,7 +116,7 @@ class CSSTestPageWithMissingRequiredElements(Page):
     title = 'Horace Test Page'
 
     _content = {
-        'hardbreaks': contentElement(selector='br', required=True)
+        'hardbreaks': element(selector='br', required=True)
     }
 
 

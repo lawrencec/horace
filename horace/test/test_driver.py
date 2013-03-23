@@ -37,15 +37,15 @@ class TestDriver(TestCase):
 
     def test_firstElement(self):
         d = Driver()
-        first = d.firstElement()
+        first = d.first_element()
         self.assertEquals(first.tag_name, 'html')
 
     def test_lastElement(self):
         d = Driver()
-        first = d.lastElement()
+        first = d.last_element()
         self.assertEquals(first.tag_name, 'body')
 
     def test_allElements(self):
         d = Driver()
-        allElems = d.allElements()
+        allElems = d.all_elements()
         self.assertEquals(len(allElems), 3)

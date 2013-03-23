@@ -33,12 +33,12 @@ class TestAgent(TestObject):
 
     def test_toAt(self):
         agent = Agent(self.driver)
-        agent.toAt(DuckDuckGoPage)
+        agent.to_at(DuckDuckGoPage)
         self.assertTrue(DuckDuckGoPage.title, self.driver.title)
 
     def test_currentPage(self):
         agent = Agent(self.driver)
-        agent.toAt(DuckDuckGoPage)
+        agent.to_at(DuckDuckGoPage)
         self.assertIsInstance(agent.page, DuckDuckGoPage)
 
     def test_get_attribute(self):

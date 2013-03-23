@@ -7,7 +7,6 @@ class Elements(object):
         self._elements = []
         for elem in elements:
             self._elements.append(Element(elem))
-        #((list(Element(elem))) for elem in elements)
 
     def __getitem__(self, key):
         return self._elements[key]

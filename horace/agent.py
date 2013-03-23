@@ -22,7 +22,7 @@ class Agent(object):
         if not self._currentPage.at(title):
             raise NotAtPageException(self._currentPage.title, title)
 
-    def toAt(self, Page):
+    def to_at(self, Page):
         self.to(Page)
         self.at(Page)
 

@@ -37,14 +37,14 @@ class Driver(object):
         else:
             return object.__getattribute__(self, name)
 
-    def firstElement(self):
+    def first_element(self):
         first = self._driver.find_elements_by_css_selector('html')
         return Element(first[0]) if len(first) > 0 else None
 
-    def lastElement(self):
+    def last_element(self):
         last = self._driver.find_elements_by_css_selector('*')[-1]
         return Element(last)
 
-    def allElements(self):
+    def all_elements(self):
         return Elements(self._driver.find_elements_by_css_selector('*'))
 
