@@ -15,6 +15,8 @@ class ContentNode(object):
 
     def __getattr__(self, item):
         if item in self._content_instances:
+            if isinstance(self._content_instances[item], ContentNode):
+                self._content_instances[item].initialize_content()
             return self._content_instances[item]
         else:
             return object.__getattribute__(self, item)

@@ -17,7 +17,6 @@ class Module(ContentNode):
         super(Module, self).__init__(driver)
 
     def initialize_content(self):
-
         if not self._baseNode and self.baseSelector is not None:
             node = super(Module, self).get_elements_by_selector(self.baseSelector)
             if len(node) > 0:
