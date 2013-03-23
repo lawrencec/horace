@@ -36,14 +36,36 @@ class ContentNode(object):
 
             if 'module' in contentItem and contentItem['module'] is not None:
                 moduleClass = content[contentItemName]['module']
+                isList = False
+                if 'isList' in content[contentItemName]:
+                    isList = content[contentItemName]['isList']
+
                 moduleArgs = {key: value for key, value in contentItem.items()
-                              if key is not 'module'}
-                self.initializeModule(moduleClass, contentItemName, moduleArgs)
+                              if key is not 'module' and key is not 'isList'}
+                if not isList:
+                    self.initializeModule(moduleClass, contentItemName, moduleArgs)
+                else:
+                    self.initializeModules(moduleClass, contentItemName, moduleArgs)
             elif 'selector' in contentItem and contentItem['selector'] \
                     is not None:
                 required = content[contentItemName]['required'] \
                     if 'required' in content[contentItemName] else True
                 self.initializeElement(contentItemName, required)
+
+    def initializeModule(self, moduleClass, module_name, configuration):
+        content = moduleClass(self._driver, **configuration)
+        self._content_instances[module_name] = content
+
+    def initializeModules(self, moduleClass, module_name, configuration):
+        content = []
+        elemList = self.getElementBySelector(
+            selector=configuration['selector'],
+            required=configuration['required']
+        )
+        for elem in elemList:
+            configuration['element'] = elem
+            content.append(moduleClass(self._driver, **configuration))
+        self._content_instances[module_name] = content
 
     def getElementBySelector(self, selector, container=None, required=True):
         self._driver.switch_to_default_content()
@@ -74,3 +96,10 @@ def contentModule(module=None, selector=None, required=True):
         'required': required,
         'selector': selector
     }
+
+
+def contentModuleList(module=None, selector=None, required=True):
+    module = contentModule(module, selector, required)
+    module['isList'] = True
+    return module
+

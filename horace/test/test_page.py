@@ -10,8 +10,13 @@ class TestPageObject(TestObject):
         webPage = CSSTestPage(self.driver)
         self.assertIsNotNone(webPage.paragraphSection)
         self.assertEquals(len(webPage.paragraphSection.paragraphs), 2)
+        self.assertIsNotNone(webPage.table)
+        self.assertIsNotNone(webPage.table.rows)
+        self.assertEquals(len(webPage.table.rows), 4)
+        self.assertEquals(webPage.table.rows[1].data.text, 'Division 1')
         self.assertFalse('paragraphs' in webPage._content_instances)
-        self.assertEquals(len(webPage._content_instances), 3)
+        self.assertEquals(len(webPage._content_instances), 4)
+
 
     def test_page_title(self):
         webPage = CSSTestPage(self.driver)

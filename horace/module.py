@@ -6,17 +6,23 @@ from horace.exceptions import ElementNotFoundException
 class Module(ContentNode):
     _content = {}
 
-    def __init__(self, driver, selector=None, required=True):
+    def __init__(self, driver, selector=None, required=True, element=None):
         self.required = required
-        self.base = selector if selector else self.base
+        self._baseNode = None
+        if not element:
+            self.base = selector if selector else self.base
+        else:
+            self._baseNode = Element(element)
+
         super(Module, self).__init__(driver)
 
     def initializeContent(self):
-        node = None
-        if self.base is not None:
+
+        if not self._baseNode and self.base is not None:
             node = super(Module, self).getElementBySelector(self.base)
-        if len(node) > 0:
-            self._baseNode = Element(node[0])
+            if len(node) > 0:
+                self._baseNode = Element(node[0])
+
         super(Module, self).initializeContent()
 
     def getElementBySelector(self, selector, container=None, required=True):

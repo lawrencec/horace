@@ -47,3 +47,4 @@ class Driver(object):
 
     def allElements(self):
         return Elements(self._driver.find_elements_by_css_selector('*'))
+

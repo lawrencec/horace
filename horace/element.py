@@ -1,6 +1,7 @@
 from selenium.common.exceptions import InvalidSelectorException
 from horace.exceptions import ElementNotFoundException
 
+from selenium.webdriver.remote.command import Command
 
 class Element(object):
     def __init__(self, element):
@@ -35,7 +36,7 @@ class Element(object):
     def text(self):
         return self._element.text
 
-    def value(self, value=None):
+    def value(self, value=None, doReturn=False):
         if not value:
             return self._element.get_attribute('value')
         else:
@@ -58,3 +59,9 @@ class Element(object):
 
     def find(self, selector):
         return self._element.find_elements_by_css_selector(selector)
+
+    def double_click(self, driver):
+        driver.execute(Command.MOVE_TO, {'element': self._element.id})
+        driver.execute(Command.DOUBLE_CLICK, {})
+        return self
+

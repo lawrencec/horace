@@ -1,6 +1,6 @@
 from unittest import TestCase
 from selenium import webdriver
-from horace.contentNode import contentModule, contentElement
+from horace.contentNode import contentModule, contentModuleList, contentElement
 from horace.page import Page
 from horace.module import Module
 from config import html_fixture_url
@@ -66,6 +66,21 @@ class ParagraphSectionModule(Module):
     }
 
 
+class TableRowModule(Module):
+    _content = {
+        'data': contentElement(selector='td', required=False)
+    }
+
+
+class TableModule(Module):
+    base = 'table'
+    required = True
+
+    _content = {
+        'rows': contentModuleList(module=TableRowModule, selector='tr')
+    }
+
+
 class IFrame(Module):
     base = '#anIFrame'
 
@@ -84,7 +99,8 @@ class CSSTestPage(Page):
             required=True
         ),
         'headingTwos': contentElement(selector='h2'),
-        'anIFrame': contentModule(module=IFrame)
+        'anIFrame': contentModule(module=IFrame),
+        'table': contentModule(module=TableModule)
     }
 
     # Setting properties via the @property decorator is purely optional but it
@@ -110,8 +126,6 @@ class UnknownTestPage(Page):
 
     def at(self, title):
         return None
-
-
 
 class DuckDuckGoPage(Page):
     url = 'http://duckduckgo.com/'
