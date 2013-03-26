@@ -13,7 +13,7 @@ class Page(ContentNode):
         return unicode(title) == unicode(self.title)
 
     def toFrame(self, frame):
-        self._driver.switch_to_frame(frame._baseNode.id)
+        self._driver.switch_to_frame(frame.id)
 
     def to_default_content(self):
         self._driver.switch_to_default_content()

@@ -16,6 +16,13 @@ class Module(ContentNode):
 
         super(Module, self).__init__(driver)
 
+    def __getattr__(self, item):
+        valid_keys = Element.__dict__.keys()
+        if item in valid_keys and self._baseNode:
+            return Element.__dict__[item].__get__(self._baseNode)
+        else:
+            return super(Module, self).__getattr__(item)
+
     def initialize_content(self):
         if not self._baseNode and self.baseSelector is not None:
             node = super(Module, self).get_elements_by_selector(self.baseSelector)
@@ -25,7 +32,7 @@ class Module(ContentNode):
         super(Module, self).initialize_content()
 
     def get_elements_by_selector(self, selector, container=None, required=True):
-        if self._baseNode.tag_name == 'iframe':
+        if self.tag_name == 'iframe':
             self.to_frame()
             element = self._driver.find_elements_by_css_selector(selector)
             if required and len(element) == 0:
