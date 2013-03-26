@@ -106,5 +106,6 @@ driver = Driver({
     'driver': 'phantomjs'
 })
 # Web pages
-TodoMVC = TodoMVCAgent(driver)
-TodoMVC.drive()
+if __name__ == '__main__':
+    TodoMVC = TodoMVCAgent(driver)
+    TodoMVC.drive()
