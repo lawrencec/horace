@@ -25,7 +25,6 @@ class Module(ContentNode):
         super(Module, self).initialize_content()
 
     def get_elements_by_selector(self, selector, container=None, required=True):
-
         if self._baseNode.tag_name == 'iframe':
             self.to_frame()
             element = self._driver.find_elements_by_css_selector(selector)

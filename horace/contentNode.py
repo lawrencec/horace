@@ -8,15 +8,14 @@ class ContentNode(object):
         self._driver = driver
         self._content_instances = {}
         try:
-            if self._content:
-                self.initialize_content()
+            self.initialize_content()
         except Exception, e:
             raise e
 
     def __getattr__(self, item):
         if item in self._content_instances:
             if isinstance(self._content_instances[item], ContentNode):
-                self._content_instances[item].initialize_content()
+                self.initialize_content()
             return self._content_instances[item]
         else:
             return object.__getattribute__(self, item)
