@@ -25,9 +25,16 @@ class Agent(object):
     def to_at(self, Page):
         self.to(Page)
         self.at(Page)
+        return self
 
     def drive(self):
         pass
+
+    def do(self, action=None, *args):
+        if action:
+            action(self._currentPage, *args)
+        return self
+
 
     def close(self):
         self._driver.close()

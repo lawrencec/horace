@@ -4,7 +4,7 @@ from horace.page import Page
 from horace.module import Module
 from horace.contentNode import element, content_module, content_module_list
 from selenium.webdriver.common.keys import Keys
-from time import sleep
+
 
 class TodoMVCFooter(Module):
     baseSelector = '#info'
@@ -71,41 +71,51 @@ class TodoMVCPage(Page):
 
 class TodoMVCAgent(Agent):
 
-    def presentAndCorrect(self):
-        print 'Title:\n%s\n' % self.page.header.title.text
-        print 'Title is displayed:\n%s\n' % self.page.header.title.displayed
-        print 'Footer is displayed:\n%s\n' % self.page.footer.p.displayed
-        print 'Footer text\n%s\n' % self.page.footer.text
+    def presentAndCorrect(self, page):
+        if not page:
+            page = self.page
+        print 'Title:\n%s\n' % page.header.title.text
+        print 'Title is displayed:\n%s\n' % page.header.title.displayed
+        print 'Footer is displayed:\n%s\n' % page.footer.p.displayed
+        print 'Footer text\n%s\n' % page.footer.text
         # self._driver.delete_all_cookies()
-        print 'Filters is displayed:\n%s\n' % self.page.todo.filters.all.displayed
+        print 'Filters is displayed:\n%s\n' % page.todo.filters.all.displayed
 
     def clearAll(self):
         self._driver.execute_script('return localStorage.clear()')
 
-    def addTodo(self, item):
-        self.page.new.double_click(self._driver)
-        self.page.new.value(item)
-        print 'Entered todo is:\n%s\n' % self.page.new.value()
-        self.page.new.value(Keys.RETURN)
-        print 'Filters is displayed:\n%s\n' % self.page.todo.filters.all.displayed
+    def addTodo(self, page, item):
+        if not page:
+            page = self.page
+        page.new.double_click(self._driver)
+        page.new.value(item)
+        print 'Entered todo is:\n%s\n' % page.new.value()
+        page.new.value(Keys.RETURN)
+        print 'Filters is displayed:\n%s\n' % page.todo.filters.all.displayed
 
     def filterBy(self, filterType):
         pass
 
+    def printNumberOfTodos(self, page):
+        if not page:
+            page = self.page
+        print '\nYou have %s todo item(s)\n' % len(page.todo.list.items)
+
     def drive(self):
-        self.to_at(TodoMVCPage)
-        self.presentAndCorrect()
-        self.addTodo('food')
-        print '\nYou have %s todo item(s)\n' % len(self.page.todo.list.items)
-        self.addTodo('moar food')
-        print '\nYou have %s todo item(s)\n' % len(self.page.todo.list.items)
+        self.to_at(TodoMVCPage).do(
+            self.presentAndCorrect)\
+            .do(self.addTodo, 'food')\
+            .do(self.printNumberOfTodos)\
+            .do(self.addTodo, 'moar food')\
+            .do(self.printNumberOfTodos)
+
         self.clearAll()
         self.close()
 
 driver = Driver({
     'driver': 'phantomjs'
 })
-# Web pages
+
 if __name__ == '__main__':
     TodoMVC = TodoMVCAgent(driver)
     TodoMVC.drive()
