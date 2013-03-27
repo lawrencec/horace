@@ -5,8 +5,6 @@ from horace.module import Module
 from horace.contentNode import element, content_module
 import re
 
-# def sel(context, selector=None, module=None):
-#     return lambda context: context.getElementBySelector(selector)
 
 class DuckDuckGoFormModule(Module):
     baseSelector = '#search_form_homepage'
@@ -42,12 +40,14 @@ class DuckDuckGoHomePage(Page):
 
 
 class DuckDuckGoSearchPage(Page):
-    url = '^https://www.duckduckgo.com?q=' # TODO use regexp here in at()
+    url = '^https://www.duckduckgo.com?q='
     title = 'DuckDuckGo'
 
     _content = {
         'logo': element(selector='#logo_homepage_link', required=False),
-        'links': element(selector='div[class="results_links_deep highlight_d2"]')
+        'links': element(
+            selector='div[class="results_links_deep highlight_d2"]'
+        )
     }
 
     def at(self, title):
@@ -66,10 +66,9 @@ class DuckDuckGoAgent(Agent):
         self.close()
 
 driver = Driver({
-    'driver': 'phantoms'
+    'driver': 'phantomjs'
 })
-# Web pages
+
 if __name__ == '__main__':
     DDG = DuckDuckGoAgent(driver)
     DDG.drive()
-
