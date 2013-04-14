@@ -1,4 +1,3 @@
-
 # Horace
 
 A page object based interface around webdriver to help with automating of browser
@@ -56,6 +55,10 @@ The tests require an install of firefox or phantomjs. The test/config.py file
 by default states phantomjs as the default browser to use. Change it to firefox
 if you don't have phantomjs installed.
 
+If you have phantomjs installed, first run it in webdriver mode:
+
+    phantomjs --webdriver=8910
+    
 Tests can be run using nose like so:
 
     cd tests
