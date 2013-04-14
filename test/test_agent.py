@@ -68,6 +68,7 @@ class TestAgent(TestObject):
         agent.foo = 0
         def my_func(page):
             agent.foo = 1
+        CSSTestPage.wait = 5
         agent.to_at(CSSTestPage)
         agent.do(my_func)
         self.assertEquals(agent.foo, 1)

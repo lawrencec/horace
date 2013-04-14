@@ -3,11 +3,8 @@ from selenium import webdriver
 from horace.contentNode import content_module, content_module_list, element
 from horace.page import Page
 from horace.module import Module, IFrameModule
-from config import html_fixture_url
-
 import config
-
-
+from config import html_fixture_url
 drivers = {
     'firefox': webdriver.Firefox,
     'chrome': webdriver.Chrome
