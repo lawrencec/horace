@@ -1,5 +1,6 @@
 from utils import TestObject
-from utils import CSSTestPage, CSSTestPageWithMissingRequiredElements
+from utils import CSSTestPage, CSSTestPageWithMissingRequiredElements, ParagraphSectionModule
+from horace.contentNode import element, content_module, content_module_list
 from horace.exceptions import ElementNotFoundException
 
 
@@ -24,7 +25,8 @@ class TestPageObject(TestObject):
 
     def test_page_with_required_elements_throws_exception(self):
         try:
-            CSSTestPageWithMissingRequiredElements(self.driver)
+            page = CSSTestPageWithMissingRequiredElements(self.driver)
+            len(page.hardbreaks)
             self.fail("Didn't raise Exception")
         except ElementNotFoundException, e:
             self.assertEquals(
@@ -47,9 +49,61 @@ class TestPageObject(TestObject):
                 e.message
             )
 
-    def test_iframe_element(self):
+    def test_refresh_content(self):
+        webPage = CSSTestPage(self.driver)
+        self.assertIsNotNone(webPage.headingTwos)
+        self.assertEquals(len(webPage.paragraphSection.paragraphs), 2)
+        webPage.refresh_content('paragraphSection')
+        self.assertEquals(len(webPage.paragraphSection.paragraphs), 2)
+
+    def test_iframe_with_elements(self):
         webPage = CSSTestPage(self.driver)
         self.assertIsNotNone(webPage.anIFrame)
-        self.assertEqual(len(webPage.anIFrame.get_elements_by_selector('h2')), 1)
-        self.assertEqual(len(webPage.anIFrame.headingTwos), 1)
+        # self.assertEqual(len(webPage.anIFrame.get_elements_by_selector('h2')), 1)
+        self.assertEqual(len(webPage.anIFrame.headingTwoForIframe), 1)
         self.assertEqual(len(webPage.headingTwos), 9)
+
+    def test_iframe_with_modules(self):
+        webPage = CSSTestPage(self.driver)
+        self.assertIsNotNone(webPage.anIFrame)
+        self.assertIsNotNone(webPage.headingTwos)
+        self.assertEqual(len(webPage.anIFrame.headingTwoForIframe), 1)
+        self.assertEqual(len(webPage.headingTwos), 9)
+
+        self.assertIsNotNone(webPage.anIFrame.table)
+        webPage.anIFrame.activate()
+        self.assertEqual(len(webPage.anIFrame.table.rows), 2)
+        self.assertEqual(len(webPage.anIFrame.rows), 2)
+
+    def test_elements_helper(self):
+        element_definition = element('foo', False)
+        self.assertEquals(element_definition, {'selector':'foo', 'required': False})
+        try:
+            element(None, False)
+        except Exception, e:
+            self.assertEquals(
+                "selector required",
+                e.message
+            )
+
+    def test_module_helper(self):
+        module_definition = content_module(ParagraphSectionModule, 'foo', False)
+        self.assertEquals(module_definition, {'module': ParagraphSectionModule, 'selector':'foo', 'required': False})
+        try:
+            content_module(None, None, False)
+        except Exception, e:
+            self.assertEquals(
+                "selector or module required",
+                e.message
+            )
+
+    def test_module_list_helper(self):
+        module_list_definition = content_module_list(ParagraphSectionModule, 'foo', False)
+        self.assertEquals(module_list_definition, {'module': ParagraphSectionModule, 'selector':'foo', 'required': False, 'isList': True})
+        try:
+            content_module_list(None, 'foo', False)
+        except Exception, e:
+            self.assertEquals(
+                "selector or module required",
+                e.message
+            )

@@ -5,18 +5,17 @@ class Page(ContentNode):
     url = None
     title = None
     _content = {}
-
-    def __init__(self, driver):
-        super(Page, self).__init__(driver)
+    wait = 0
 
     def at(self, title):
         return unicode(title) == unicode(self.title)
 
-    def toFrame(self, frame):
-        self._driver.switch_to_frame(frame.id)
+    def at(self, title):
+        return unicode(title) == unicode(self.title)
 
-    def to_default_content(self):
-        self._driver.switch_to_default_content()
+    def initialize_content(self, item):
+        self.to_default_content()
+        super(Page, self).initialize_content()
 
     @property
     def url(self):

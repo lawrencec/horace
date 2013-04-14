@@ -34,10 +34,6 @@ class DuckDuckGoHomePage(Page):
         'footer': content_module(module=DuckDuckGoFooterModule)
     }
 
-    # def query(self, q):
-    #     self.form.input.value(q)
-    #     self.form.submit.click()
-
 
 class DuckDuckGoSearchPage(Page):
     url = '^https://www.duckduckgo.com?q='

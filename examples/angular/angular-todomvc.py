@@ -97,6 +97,7 @@ class TodoMVCAgent(Agent):
         pass
 
     def printNumberOfTodos(self, page):
+        page.refresh_content('todo')
         if not page:
             page = self.page
         print '\nYou have %s todo item(s)\n' % len(page.todo.list.items)

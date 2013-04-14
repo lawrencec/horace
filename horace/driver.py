@@ -30,10 +30,10 @@ class Driver(object):
                 })
 
     def __getattr__(self, name):
-        if name in webdriver.Remote.__dict__.keys():
-            return webdriver.Remote.__dict__[name].__get__(self._driver)
-        elif name == '_driver':
+        if name == '_driver':
             return self._driver
+        elif name in webdriver.Remote.__dict__.keys():
+            return webdriver.Remote.__dict__[name].__get__(self._driver)
         else:
             return object.__getattribute__(self, name)
 

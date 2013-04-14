@@ -2,7 +2,7 @@ from unittest import TestCase
 from selenium import webdriver
 from horace.contentNode import content_module, content_module_list, element
 from horace.page import Page
-from horace.module import Module
+from horace.module import Module, IFrameModule
 from config import html_fixture_url
 
 import config
@@ -81,11 +81,13 @@ class TableModule(Module):
     }
 
 
-class IFrame(Module):
+class IFrame(IFrameModule):
     baseSelector = '#anIFrame'
 
     _content = {
-        'headingTwos': element(selector='h2')
+        'headingTwoForIframe': element(selector='h2'),
+        'table': content_module(module=TableModule),
+        'rows': content_module_list(module=TableRowModule, selector='tr')
     }
 
 
@@ -110,7 +112,6 @@ class CSSTestPage(Page):
     #     return self._getContent('paragraphSection')
 
 
-
 class CSSTestPageWithMissingRequiredElements(Page):
     url = html_fixture_url
     title = 'Horace Test Page'
@@ -126,6 +127,7 @@ class UnknownTestPage(Page):
 
     def at(self, title):
         return None
+
 
 class DuckDuckGoPage(Page):
     url = 'http://duckduckgo.com/'

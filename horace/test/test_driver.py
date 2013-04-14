@@ -11,11 +11,11 @@ class TestDriver(TestCase):
         self.assertTrue(d._driver)
         self.assertIsInstance(d._driver, Remote)
 
-    # def test_with_config(self):
-    #     d = Driver({'driver':'firefox'})
-    #     self.assertTrue(d._driver)
-    #     self.assertIsInstance(d._driver, Firefox)
-    #     d.close()
+    def test_with_config(self):
+        d = Driver({'driver':'phantomjs'})
+        self.assertTrue(d._driver)
+        self.assertEquals(d._driver.name, 'phantomjs')
+        d.close()
 
     def test_capabilities(self):
         d = Driver()
