@@ -49,6 +49,17 @@ in order to help with code completion tools in python consoles and IDE's:
     def searchModule(self):
         return self._getContent('searchModule')
 
+## Examples
+
+See the DuckDuckGo and Angular examples in the test directory. You'll probably need to install Horace first via python
+setup.py or pip.
+
+The DDG example performs a search query on the DDG home page and then shows how many search results were found.
+
+The Angular example loads up the ToDoMVC angular page and adds two todo items to the todo list.
+
+Both examples only tested and phantomjs and Firefox so far (Mac).
+
 ## Tests
 
 The tests require an install of firefox or phantomjs. The test/config.py file
