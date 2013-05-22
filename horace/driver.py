@@ -48,3 +48,7 @@ class Driver(object):
     def all_elements(self):
         return Elements(self._driver.find_elements_by_css_selector('*'))
 
+    def close(self):
+        if len(self._driver.window_handles) > 0:
+            self._driver.close()
+

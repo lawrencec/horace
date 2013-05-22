@@ -1,4 +1,4 @@
-# Horace
+# Horace [![Build Status](https://travis-ci.org/lawrencec/horace.png?branch=master)](https://travis-ci.org/lawrencec/horace)
 
 A page object based interface around webdriver to help with automating of browser
 navigation, screen scraping and testing. Inspired by [Geb](http://gebish.org).
