@@ -128,4 +128,4 @@ class UnknownTestPage(Page):
 
 class DuckDuckGoPage(Page):
     url = 'http://duckduckgo.com/'
-    title = 'DuckDuckGo'
+    title = 'Search DuckDuckGo'

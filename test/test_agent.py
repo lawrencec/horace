@@ -26,7 +26,7 @@ class TestAgent(TestObject):
             self.fail("Didn't raise Exception")
         except NotAtPageException, e:
             self.assertEquals(
-                'Not at correct page. Expected "unknown" but found "DuckDuckGo"',
+                'Not at correct page. Expected "unknown" but found "Search DuckDuckGo"',
                 e.message
             )
         self.assertRaises(Exception, agent.at, UnknownTestPage)

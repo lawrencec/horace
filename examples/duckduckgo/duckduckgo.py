@@ -26,7 +26,7 @@ class DuckDuckGoFooterModule(Module):
 
 class DuckDuckGoHomePage(Page):
     url = 'https://www.duckduckgo.com'
-    title = 'DuckDuckGo'
+    title = 'Search DuckDuckGo'
 
     _content = {
         'logo': element(selector='#logo_homepage_link'),
