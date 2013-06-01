@@ -1,6 +1,7 @@
 from horace.exceptions import NotAtPageException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
+from urllib import urlencode
 
 
 class Agent(object):
@@ -15,8 +16,11 @@ class Agent(object):
             else:
                 return object.__getattribute__(self, name)
 
-        def to(self, Page):
-            self._driver.get(Page.url)
+        def to(self, page, parameters=None):
+            url = page.url
+            if parameters is not None:
+                url = '%s?%s' % (url, urlencode(parameters))
+            self._driver.get(url)
 
         def at(self, page):
             self._currentPage = page(self._driver)
@@ -34,9 +38,12 @@ class Agent(object):
                 except TimeoutException:
                     raise NotAtPageException(self._currentPage.title, title)
 
-        def to_at(self, Page):
-            self.to(Page)
-            self.at(Page)
+            return self
+
+        def to_at(self, page, parameters=None):
+            self.to(page, parameters)
+            self.at(page)
+
             return self
 
         def do(self, action=None, *args):
