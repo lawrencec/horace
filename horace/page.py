@@ -17,6 +17,12 @@ class Page(ContentNode):
         self.to_default_content()
         super(Page, self).initialize_content()
 
+    def take_screenshot(self, filename=None):
+        if filename is None:
+            return self._driver.get_screenshot_as_base64()
+        else:
+            return self._driver.get_screenshot_as_file(filename)
+
     @property
     def url(self):
         return self.url

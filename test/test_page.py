@@ -1,3 +1,4 @@
+import os
 from utils import TestObject
 from utils import CSSTestPage, CSSTestPageWithMissingRequiredElements, ParagraphSectionModule
 from horace.contentNode import element, content_module, content_module_list
@@ -107,3 +108,20 @@ class TestPageObject(TestObject):
                 "selector or module required",
                 e.message
             )
+
+    def test_take_screenshot(self):
+        webPage = CSSTestPage(self.driver)
+        self.assertIsNotNone(webPage.headingTwos)
+        base64EncodedImage = webPage.take_screenshot()
+        self.assertEquals(base64EncodedImage[:10], 'iVBORw0KGg')
+
+    def test_take_screenshot_as_filename(self):
+        screenshotFilename = '/tmp/testScreenshot.png'
+        webPage = CSSTestPage(self.driver)
+        self.assertIsNotNone(webPage.headingTwos)
+
+        self.assertFalse(os.path.exists(screenshotFilename))
+        self.assertTrue(webPage.take_screenshot(screenshotFilename))
+        assert os.path.exists(screenshotFilename)
+        os.remove(screenshotFilename)
+        self.assertFalse(os.path.exists(screenshotFilename))
