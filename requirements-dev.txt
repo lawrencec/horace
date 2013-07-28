@@ -1,2 +1,2 @@
 coverage==3.6
-selenium==2.32.0
+selenium==2.33.0

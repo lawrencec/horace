@@ -46,7 +46,7 @@ class Agent(object):
 
             return self
 
-        def do(self, action=None, *args):
+        def then(self, action=None, *args):
             if action and callable(action):
                 action(self._currentPage, *args)
             return self

@@ -70,12 +70,12 @@ class TestAgent(TestObject):
             agent.foo = 1
         CSSTestPage.wait = 5
         agent.to_at(CSSTestPage)
-        agent.do(my_func)
+        agent.then(my_func)
         self.assertEquals(agent.foo, 1)
 
     def test_do_does_not_call_an_uncallable(self):
         agent = Agent(self.driver)
         agent.foo = 0
         agent.to_at(CSSTestPage)
-        agent.do(1)
+        agent.then(1)
         self.assertEquals(agent.foo, 0)
