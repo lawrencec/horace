@@ -1,6 +1,9 @@
 from horace.agent import Agent
 from horace.exceptions import NotAtPageException
-from utils import TestObject, CSSTestPage, DuckDuckGoPage, UnknownTestPage
+from utils import TestObject
+from test.DDG.pages.homepage import DuckDuckGoPage
+from test.CSSTest.pages.testpage import CSSTestPage
+from test.CSSTest.pages.unknownpage import UnknownTestPage
 
 
 class TestAgent(TestObject):
@@ -66,6 +69,7 @@ class TestAgent(TestObject):
     def test_do_calls_callable_correctly(self):
         agent = Agent(self.driver)
         agent.foo = 0
+
         def my_func(page):
             agent.foo = 1
         CSSTestPage.wait = 5

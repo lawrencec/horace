@@ -2,6 +2,7 @@ from utils import TestObject
 from horace.element import Element
 from horace.exceptions import ElementNotFoundException
 
+
 class TestElement(TestObject):
 
     def test_tag_name(self):
@@ -44,7 +45,7 @@ class TestElement(TestObject):
     def test_click(self):
         webElement = self._findBySelector('#text_field')
         element = Element(webElement)
-        element.click() # ensure focus
+        element.click()  # ensure focus
         self.assertEqual(Element(self.driver.switch_to_active_element()).id, element.id)
 
     def test_size(self):

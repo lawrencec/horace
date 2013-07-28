@@ -1,6 +1,9 @@
 import os
 from utils import TestObject
-from utils import CSSTestPage, CSSTestPageWithMissingRequiredElements, ParagraphSectionModule
+from test.CSSTest.pages.testpage import CSSTestPage
+from test.CSSTest.pages.testpage_missing_elements import CSSTestPageWithMissingRequiredElements
+from test.CSSTest.modules.paragraph import ParagraphSectionModule
+
 from horace.contentNode import element, content_module, content_module_list
 from horace.exceptions import ElementNotFoundException
 
@@ -18,7 +21,6 @@ class TestPageObject(TestObject):
         self.assertEquals(webPage.table.rows[1].data.text, 'Division 1')
         self.assertFalse('paragraphs' in webPage._content_instances)
         self.assertEquals(len(webPage._content_instances), 4)
-
 
     def test_page_title(self):
         webPage = CSSTestPage(self.driver)
@@ -78,7 +80,7 @@ class TestPageObject(TestObject):
 
     def test_elements_helper(self):
         element_definition = element('foo', False)
-        self.assertEquals(element_definition, {'selector':'foo', 'required': False})
+        self.assertEquals(element_definition, {'selector': 'foo', 'required': False})
         try:
             element(None, False)
         except Exception, e:
@@ -89,7 +91,7 @@ class TestPageObject(TestObject):
 
     def test_module_helper(self):
         module_definition = content_module(ParagraphSectionModule, 'foo', False)
-        self.assertEquals(module_definition, {'module': ParagraphSectionModule, 'selector':'foo', 'required': False})
+        self.assertEquals(module_definition, {'module': ParagraphSectionModule, 'selector': 'foo', 'required': False})
         try:
             content_module(None, None, False)
         except Exception, e:
@@ -100,7 +102,8 @@ class TestPageObject(TestObject):
 
     def test_module_list_helper(self):
         module_list_definition = content_module_list(ParagraphSectionModule, 'foo', False)
-        self.assertEquals(module_list_definition, {'module': ParagraphSectionModule, 'selector':'foo', 'required': False, 'isList': True})
+        self.assertEquals(module_list_definition,
+                          {'module': ParagraphSectionModule, 'selector': 'foo', 'required': False, 'isList': True})
         try:
             content_module_list(None, 'foo', False)
         except Exception, e:
