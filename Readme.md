@@ -68,8 +68,10 @@ if you don't have phantomjs installed.
 
 If you have phantomjs installed, first run it in webdriver mode:
 
-    phantomjs --webdriver=8910
+    phantomjs --webdriver=8910 --local-storage-path=./
     
+The localstorage path is only required if you want to run the angular todomvc app example.
+
 Tests can be run using nose like so:
 
     cd tests
