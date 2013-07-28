@@ -1,5 +1,5 @@
 from utils import TestObject
-from test.CSSTest.modules.paragraph import ParagraphSectionModule
+from CSSTest.modules.paragraph import ParagraphSectionModule
 
 
 class TestModule(TestObject):

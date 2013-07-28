@@ -42,10 +42,3 @@ class TestObject(TestCase):
         else:
             result = parent.find_element_by_css_selector(selector)
         return result
-
-    def _findAllBySelector(self, selector, parent=None):
-        if parent is None:
-            result = self.driver.find_elements_by_css_selector(selector)
-        else:
-            result = parent.find_elements_by_css_selector(selector)
-        return result

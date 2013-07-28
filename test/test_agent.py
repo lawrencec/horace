@@ -1,9 +1,9 @@
 from horace.agent import Agent
 from horace.exceptions import NotAtPageException
 from utils import TestObject
-from test.DDG.pages.homepage import DuckDuckGoPage
-from test.CSSTest.pages.testpage import CSSTestPage
-from test.CSSTest.pages.unknownpage import UnknownTestPage
+from DDG.pages.homepage import DuckDuckGoPage
+from CSSTest.pages.testpage import CSSTestPage
+from CSSTest.pages.unknownpage import UnknownTestPage
 
 
 class TestAgent(TestObject):
