@@ -1,12 +1,12 @@
 from unittest import TestCase
 from selenium import webdriver
-import config
+from test.config import html_fixture_url, driver
 from horace.agent import Agent
 
 drivers = dict(firefox=webdriver.Firefox, chrome=webdriver.Chrome)
 
 
-class HoraceTestCase(TestCase):
+class TestCaseHorace(TestCase):
     driver = None
 
     @classmethod
@@ -15,8 +15,8 @@ class HoraceTestCase(TestCase):
             'takeScreenshot': False,
             'javascriptEnabled': True
         }
-        if config.driver in drivers:
-            cls.driver = drivers[config.driver]()
+        if driver in drivers:
+            cls.driver = drivers[driver]()
         else:
             cls.driver = webdriver.Remote(
                 command_executor="http://localhost:8910/wd/hub",

@@ -1,10 +1,10 @@
 from selenium.webdriver.common.keys import Keys
 
 from examples.angular.pages.todo import TodoMVCPage
-from test.horace_test_case import HoraceTestCase
+from horace.testCase import TestCaseHorace
 
 
-class TestFoo(HoraceTestCase):
+class TestFoo(TestCaseHorace):
 
     def test_add_multiple_todos(self):
 
