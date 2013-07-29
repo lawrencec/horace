@@ -1,35 +1,20 @@
 from unittest import TestCase
-from selenium import webdriver
+from horace.driver import Driver
 from test.config import driver, platform
 from horace.agent import Agent
 
 
 class TestCaseHorace(TestCase):
-    driver = None
-
-    @classmethod
-    def setUpClass(cls):
-        caps = {
-            'takeScreenshot': False,
-            'javascriptEnabled': True,
-            'browserName': driver,
-            'platform': platform
-        }
-        cls.driver = webdriver.Remote(
-            command_executor="http://localhost:5556/wd/hub",
-            desired_capabilities=caps)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.close()
-        cls.driver = None
 
     def setUp(self):
-        self.driver = self.__class__.driver
-        self.agent = Agent(self.driver)
+        agentDriver = Driver({
+            'driver': driver,
+            'platform': platform
+        })
+        self.agent = Agent(agentDriver)
 
     def tearDown(self):
-        self.driver = None
+        self.agent.close()
 
     def to(self, page, **kwargs):
         self.agent.to(page, kwargs)
