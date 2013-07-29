@@ -1,7 +1,8 @@
-from selenium.common.exceptions import InvalidSelectorException
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.remote.command import Command
+
 from horace.exceptions import ElementNotFoundException
 
-from selenium.webdriver.remote.command import Command
 
 class Element(object):
     def __init__(self, element):
@@ -28,7 +29,7 @@ class Element(object):
         result = None
         try:
             result = self._element.find_elements_by_xpath('..')
-        except InvalidSelectorException:
+        except WebDriverException:
             raise ElementNotFoundException('..')
         return Element(result[0])
 

@@ -1,11 +1,6 @@
 from unittest import TestCase
 from selenium import webdriver
-import config
-
-drivers = {
-    'firefox': webdriver.Firefox,
-    'chrome': webdriver.Chrome
-}
+from config import driver, platform, html_fixture_url
 
 
 class TestObject(TestCase):
@@ -15,14 +10,13 @@ class TestObject(TestCase):
     def setUpClass(cls):
         caps = {
             'takeScreenshot': False,
-            'javascriptEnabled': True
+            'javascriptEnabled': True,
+            'browserName': driver,
+            'platform': platform
         }
-        if config.driver in drivers:
-            cls.driver = drivers[config.driver]()
-        else:
-            cls.driver = webdriver.Remote(
-                command_executor="http://localhost:8910/wd/hub",
-                desired_capabilities=caps)
+        cls.driver = webdriver.Remote(
+            command_executor="http://localhost:5556/wd/hub",
+            desired_capabilities=caps)
 
     @classmethod
     def tearDownClass(cls):
@@ -31,7 +25,7 @@ class TestObject(TestCase):
 
     def setUp(self):
         self.driver = self.__class__.driver
-        self.driver.get(config.html_fixture_url)
+        self.driver.get(html_fixture_url)
 
     def tearDown(self):
         self.driver = None

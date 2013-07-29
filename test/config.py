@@ -1,10 +1,9 @@
-from os import getcwd
+from os import getcwd, getenv
 
 
-driver = 'phantomjs'
-# driver = 'firefox'
-# driver = 'chrome'
+driver = getenv('BROWSER', 'phantomjs')
+platform = getenv('PLATFORM', 'MAC')
 
-test_directory = getcwd() + '/test' if not getcwd().endswith('test')  else getcwd()
+test_directory = getcwd() + '/test' if not getcwd().endswith('test') else getcwd()
 
 html_fixture_url = 'file:///%s/fixtures/html-elements.html' % test_directory

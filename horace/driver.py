@@ -2,6 +2,7 @@ from selenium import webdriver
 from horace.elements import Elements
 from horace.element import Element
 
+
 class Driver(object):
     def __new__(cls, *p, **k):
         if not '_the_instance' in cls.__dict__:
@@ -11,23 +12,18 @@ class Driver(object):
     def __init__(self, config=None):
         if config is None:
             config = {
-                'driver': 'phantomjs'
+                'driver': 'phantomjs',
+                'platform': 'MAC'
             }
 
-        drivers = {
-            'firefox': webdriver.Firefox,
-            'chrome': webdriver.Chrome
-        }
-
-        if config['driver'] in drivers:
-            self._driver = drivers[config['driver']]()
-        else:
-            self._driver = webdriver.Remote(
-                command_executor="http://localhost:8910/wd/hub",
-                desired_capabilities={
-                    'takesScreenshot': False,
-                    'javascriptEnabled': True
-                })
+        self._driver = webdriver.Remote(
+            command_executor="http://localhost:5556/wd/hub",
+            desired_capabilities={
+                'takesScreenshot': False,
+                'javascriptEnabled': True,
+                'browserName': config['driver'],
+                'platform': config['platform']
+            })
 
     def __getattr__(self, name):
         if name == '_driver':

@@ -75,7 +75,7 @@ The localstorage path is only required if you want to run the angular todomvc ap
 Tests can be run using nose like so:
 
     cd tests
-    nosetests
+    export BROWSER=phantomjs && nosetests
 
 with coverage if you have [coverage.py](http://nedbatchelder.com/code/coverage/) installed
 
@@ -84,6 +84,17 @@ with coverage if you have [coverage.py](http://nedbatchelder.com/code/coverage/)
 or if you want a html coverage report:
 
     nosetests --with-coverage --cover-html --cover-html-dir=./coverage --cover-erase --cover-package=horace
+
+### Selenium Grid
+
+Start the Selenium Grid
+
+    java -jar selenium-server-standalone-2.33.0.jar -role hub
+
+Start the selenium nodes e.g. Mac browsers
+
+    java -jar selenium-server-standalone-2.33.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5556 -browser browserName=firefox,maxInstances=5,platform=MAC -browser browserName=chrome,maxInstances=5,platform=MAC
+
 
 ## Why Horace?
 

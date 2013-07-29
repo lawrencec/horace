@@ -1,9 +1,7 @@
 from unittest import TestCase
 from selenium import webdriver
-from test.config import html_fixture_url, driver
+from test.config import driver, platform
 from horace.agent import Agent
-
-drivers = dict(firefox=webdriver.Firefox, chrome=webdriver.Chrome)
 
 
 class TestCaseHorace(TestCase):
@@ -13,14 +11,13 @@ class TestCaseHorace(TestCase):
     def setUpClass(cls):
         caps = {
             'takeScreenshot': False,
-            'javascriptEnabled': True
+            'javascriptEnabled': True,
+            'browserName': driver,
+            'platform': platform
         }
-        if driver in drivers:
-            cls.driver = drivers[driver]()
-        else:
-            cls.driver = webdriver.Remote(
-                command_executor="http://localhost:8910/wd/hub",
-                desired_capabilities=caps)
+        cls.driver = webdriver.Remote(
+            command_executor="http://localhost:5556/wd/hub",
+            desired_capabilities=caps)
 
     @classmethod
     def tearDownClass(cls):
