@@ -75,7 +75,7 @@ The localstorage path is only required if you want to run the angular todomvc ap
 Tests can be run using nose like so:
 
     cd tests
-    export BROWSER=phantomjs && nosetests
+    export BROWSER=phantomjs && PLATFORM=MAC && nosetests
 
 with coverage if you have [coverage.py](http://nedbatchelder.com/code/coverage/) installed
 
