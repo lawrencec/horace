@@ -16,14 +16,14 @@ class TestCaseHorace(TestCase):
     def tearDown(self):
         self.agent.close()
 
-    def to(self, page, **kwargs):
-        self.agent.to(page, kwargs)
+    def to(self, page, path=None, parameters=None):
+        self.agent.to(page, path, parameters)
 
     def at(self, page, **kwargs):
         self.agent.at(page, kwargs)
 
-    def to_at(self, page, **kwargs):
-        self.agent.to_at(page, kwargs)
+    def to_at(self, page, path=None, parameters=None):
+        self.agent.to_at(page, path, parameters)
 
     def __getattr__(self, item):
         if item == 'page':

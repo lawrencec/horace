@@ -16,8 +16,10 @@ class Agent(object):
             else:
                 return object.__getattribute__(self, name)
 
-        def to(self, page, parameters=None):
+        def to(self, page, path=None, parameters=None):
             url = page.url
+            if path is not None:
+                url = '%s%s' % (url, path)
             if parameters is not None:
                 url = '%s?%s' % (url, urlencode(parameters))
             self._driver.get(url)
@@ -40,8 +42,8 @@ class Agent(object):
 
             return self
 
-        def to_at(self, page, parameters=None):
-            self.to(page, parameters)
+        def to_at(self, page, path=None, parameters=None):
+            self.to(page, path, parameters)
             self.at(page)
 
             return self
