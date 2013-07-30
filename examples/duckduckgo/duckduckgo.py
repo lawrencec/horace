@@ -16,7 +16,8 @@ class DuckDuckGoAgent(Agent):
         self.close()
 
 driver = Driver({
-    'driver': 'phantomjs'
+    'driver': 'phantomjs',
+    'platform': 'MAC'
 })
 
 if __name__ == '__main__':
