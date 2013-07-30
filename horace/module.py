@@ -22,17 +22,16 @@ class Module(ContentNode):
 
     def initialize_base(self):
         if not self._baseNode and self.baseSelector is not None:
-            node = super(Module, self).get_elements_by_selector(self.baseSelector)
+            node = super(Module, self).get_elements_by_selector(self.baseSelector, required=self.required)
             if len(node) > 0:
                 self._baseNode = Element(node[0])
         super(Module, self).initialize_base()
 
-
     def get_elements_by_selector(self, selector, container=None, required=True):
         return super(Module, self).get_elements_by_selector(
-                selector,
-                self._baseNode._element,
-                required
+            selector,
+            self._baseNode._element if self._baseNode else None,
+            required
         )
 
     def get_base_element(self):
