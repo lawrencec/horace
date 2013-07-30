@@ -2,6 +2,6 @@ language: python
 install:
   - pip install -r requirements.txt --use-mirrors
 before_script:
-  - phantomjs --webdriver=8910&
+  - phantomjs --webdriver=5556&
 # command to run tests
 script: nosetests --verbose
