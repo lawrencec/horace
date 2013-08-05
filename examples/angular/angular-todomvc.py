@@ -1,9 +1,8 @@
 from selenium.webdriver.common.keys import Keys
-
 from horace.driver import Driver
 from horace.agent import Agent
+from examples.angular.pages.todoframework import TodoMVCFrameworkPage
 
-from examples.angular.pages.todo import TodoMVCPage
 
 class TodoMVCAgent(Agent):
 
@@ -41,7 +40,7 @@ class TodoMVCAgent(Agent):
         return self
 
     def drive(self):
-        self.to_at(TodoMVCPage)
+        self.to_at(TodoMVCFrameworkPage)
 
         (self.presentAndCorrect()
             .addTodo('food')
@@ -53,7 +52,8 @@ class TodoMVCAgent(Agent):
         self.close()
 
 driver = Driver({
-    'driver': 'phantomjs'
+    'driver': 'phantomjs',
+    'platform': 'MAC'
 })
 
 if __name__ == '__main__':

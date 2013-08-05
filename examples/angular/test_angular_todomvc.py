@@ -1,6 +1,5 @@
 from selenium.webdriver.common.keys import Keys
-
-from examples.angular.pages.todo import TodoMVCPage
+from examples.angular.pages.todoframework import TodoMVCFrameworkPage
 from horace.testCase import TestCaseHorace
 
 
@@ -8,7 +7,7 @@ class TestFoo(TestCaseHorace):
 
     def test_add_multiple_todos(self):
 
-        self.to_at(TodoMVCPage)
+        self.to_at(TodoMVCFrameworkPage)
         (self.presentAndCorrect()
             .addTodo('food')
             .addTodo('moar food')
