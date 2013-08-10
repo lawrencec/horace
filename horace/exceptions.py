@@ -15,3 +15,11 @@ class ElementNotFoundException(Exception):
 
     def __str__(self):
         return repr(self.message)
+
+
+class JavascriptExecutionException(Exception):
+    def __init__(self, message):
+        self.message = 'Error executing javascript: %s' % message
+
+    def __str__(self):
+        return repr(self.message)

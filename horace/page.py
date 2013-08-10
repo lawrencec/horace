@@ -1,4 +1,6 @@
+from selenium.common.exceptions import WebDriverException
 from horace.contentNode import ContentNode
+from horace.exceptions import JavascriptExecutionException
 
 
 class Page(ContentNode):
@@ -22,6 +24,12 @@ class Page(ContentNode):
             return self._driver.get_screenshot_as_base64()
         else:
             return self._driver.get_screenshot_as_file(filename)
+
+    def execute_script(self, script):
+        try:
+            return self._driver.execute_script(script)
+        except WebDriverException, e:
+            raise JavascriptExecutionException(e.msg)
 
     @property
     def url(self):
