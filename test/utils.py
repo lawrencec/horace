@@ -5,6 +5,7 @@ from config import driver, platform, html_fixture_url
 
 class TestObject(TestCase):
     driver = None
+    fixture_url = html_fixture_url
 
     @classmethod
     def setUpClass(cls):
@@ -25,7 +26,7 @@ class TestObject(TestCase):
 
     def setUp(self):
         self.driver = self.__class__.driver
-        self.driver.get(html_fixture_url)
+        self.driver.get(self.fixture_url)
 
     def tearDown(self):
         self.driver = None
