@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='horace',
-    version='0.5',
+    version='0.6',
     packages=['horace' ],
     url='http://github.com/lawrencec/horace',
     license='LICENSE.txt',
@@ -10,6 +10,6 @@ setup(
     author_email='lawrence@nodetraveller.com',
     description='A page object pattern based web browser automation tool',
     install_requires=[
-        'selenium>=2.32.0'
+        'selenium>=2.34.0'
     ]
 )
