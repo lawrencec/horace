@@ -19,8 +19,8 @@ class TestCaseHorace(TestCase):
     def to(self, page, path=None, parameters=None):
         self.agent.to(page, path, parameters)
 
-    def at(self, page, **kwargs):
-        self.agent.at(page, kwargs)
+    def at(self, page):
+        self.agent.at(page)
 
     def to_at(self, page, path=None, parameters=None):
         self.agent.to_at(page, path, parameters)
