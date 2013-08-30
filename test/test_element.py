@@ -56,7 +56,7 @@ class TestElement(TestObject):
     def test_style(self):
         webElement = self._findBySelector('#hiddenElement')
         element = Element(webElement)
-        self.assertEqual(element.style('display'), 'none')
+        self.assertTrue(element.style('display') in [None, 'none'])
 
     def test_location(self):
         webElement = self._findBySelector('#headings')

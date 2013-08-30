@@ -1,3 +1,4 @@
+from time import sleep
 from horace.agent import Agent
 from horace.exceptions import NotAtPageException
 from utils import TestObject
@@ -13,7 +14,8 @@ class TestAgent(TestObject):
         agent.to(DuckDuckGoPage)
         self.assertNotEqual(self.driver.current_url, CSSTestPage.url)
         agent.to(CSSTestPage)
-        self.assertTrue(self.driver.current_url.endswith(CSSTestPage.url))
+        # have to split on final directory as chrome has file:/// instead of file://// (like firefox and phantomjs)
+        self.assertTrue(self.driver.current_url.split('fixtures/')[1].endswith(CSSTestPage.url.split('fixtures/')[1]))
 
     def test_at(self):
         agent = Agent(self.driver)
