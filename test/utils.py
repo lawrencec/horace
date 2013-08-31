@@ -16,7 +16,7 @@ class TestObject(TestCase):
             'platform': platform
         }
         cls.driver = webdriver.Remote(
-            command_executor="http://localhost:5556/wd/hub",
+            command_executor="http://localhost:4445/wd/hub",
             desired_capabilities=caps)
 
     @classmethod

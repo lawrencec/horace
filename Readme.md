@@ -93,7 +93,7 @@ Start the Selenium Grid
 
 Start the selenium nodes e.g. Mac browsers
 
-    java -jar selenium-server-standalone-2.33.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5556 -browser browserName=firefox,maxInstances=5,platform=MAC -browser browserName=chrome,maxInstances=5,platform=MAC
+    java -jar selenium-server-standalone-2.33.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 4445 -browser browserName=firefox,maxInstances=5,platform=MAC -browser browserName=chrome,maxInstances=5,platform=MAC
 
 
 ## Why Horace?
