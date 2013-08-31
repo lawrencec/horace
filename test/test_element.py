@@ -1,9 +1,9 @@
-from utils import TestObject
+from utils import HoraceTestObject
 from horace.element import Element
 from horace.exceptions import ElementNotFoundException
 
 
-class TestElement(TestObject):
+class TestElement(HoraceTestObject):
 
     def test_tag_name(self):
         webElement = self._findBySelector('link[title="A CSS stylesheet"]')

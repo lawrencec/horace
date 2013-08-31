@@ -1,12 +1,14 @@
 from horace.exceptions import JavascriptExecutionException
-from utils import TestObject
+from utils import HoraceTestObject
 from test.JSTest.pages.jstestpage import JSTestPage
 from config import js_fixture_url
 
 
-class TestJavascript(TestObject):
+class TestJavascript(HoraceTestObject):
     driver = None
-    fixture_url = js_fixture_url
+
+    def _get_default_fixture_url(self):
+        return js_fixture_url
 
     def test_page_javascript_returns_document_variable(self):
         webPage = JSTestPage(self.driver)

@@ -1,13 +1,14 @@
+from os import getenv
 from unittest import TestCase
 from selenium.webdriver import Remote
 from horace.driver import Driver
-from config import html_fixture_url, driver, platform
+from config import html_fixture_url
 
 
 class TestDriver(TestCase):
     config = {
-        'driver': driver,
-        'platform': platform
+        'driver': getenv('BROWSER', 'phantomjs'),
+        'platform': getenv('PLATFORM', 'ANY')
     }
 
     def test_default_config(self):
@@ -19,7 +20,7 @@ class TestDriver(TestCase):
     def test_with_config(self):
         d = Driver(TestDriver.config)
         self.assertTrue(d._driver)
-        self.assertEquals(d._driver.name, driver)
+        self.assertEquals(d._driver.name, getenv('BROWSER', 'phantomjs'))
         d.close()
 
     def test_capabilities(self):

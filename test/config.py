@@ -1,8 +1,7 @@
 from os import getcwd, getenv
 
 
-driver = getenv('BROWSER', 'phantomjs')
-platform = getenv('PLATFORM', 'MAC')
+# driver = getenv('BROWSER', 'phantomjs')
 
 test_directory = getcwd() + '/test' if not getcwd().endswith('test') else getcwd()
 

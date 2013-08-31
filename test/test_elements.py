@@ -1,8 +1,8 @@
 from horace.elements import Elements
-from utils import TestObject
+from utils import HoraceTestObject
 
 
-class TestElements(TestObject):
+class TestElements(HoraceTestObject):
 
     def _findBySelector(self, selector, parent=None):
         if parent is None:

@@ -1,5 +1,5 @@
 import os
-from utils import TestObject
+from utils import HoraceTestObject
 from test.CSSTest.pages.testpage import CSSTestPage
 from test.CSSTest.pages.testpage_missing_elements import CSSTestPageWithMissingRequiredElements
 from test.CSSTest.modules.paragraph import ParagraphSectionModule
@@ -8,7 +8,7 @@ from horace.contentNode import element, content_module, content_module_list
 from horace.exceptions import ElementNotFoundException
 
 
-class TestPageObject(TestObject):
+class TestPageObject(HoraceTestObject):
     driver = None
 
     def test_page_modules(self):

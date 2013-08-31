@@ -1,13 +1,12 @@
-from time import sleep
 from horace.agent import Agent
 from horace.exceptions import NotAtPageException
-from utils import TestObject
+from utils import HoraceTestObject
 from DDG.pages.homepage import DuckDuckGoPage
 from CSSTest.pages.testpage import CSSTestPage
 from CSSTest.pages.unknownpage import UnknownTestPage
 
 
-class TestAgent(TestObject):
+class TestAgent(HoraceTestObject):
 
     def test_to(self):
         agent = Agent(self.driver)

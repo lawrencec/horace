@@ -1,19 +1,19 @@
+from os import getenv
 from unittest import TestCase
 from selenium import webdriver
-from config import driver, platform, html_fixture_url
+from config import html_fixture_url
 
 
 class TestObject(TestCase):
     driver = None
-    fixture_url = html_fixture_url
 
     @classmethod
     def setUpClass(cls):
         caps = {
             'takeScreenshot': False,
             'javascriptEnabled': True,
-            'browserName': driver,
-            'platform': platform
+            'browserName': cls._get_driver(),
+            'platform': cls._get_platform()
         }
         cls.driver = webdriver.Remote(
             command_executor="http://localhost:4445/wd/hub",
@@ -26,7 +26,7 @@ class TestObject(TestCase):
 
     def setUp(self):
         self.driver = self.__class__.driver
-        self.driver.get(self.fixture_url)
+        self.driver.get(self._get_default_fixture_url())
 
     def tearDown(self):
         self.driver = None
@@ -37,3 +37,20 @@ class TestObject(TestCase):
         else:
             result = parent.find_element_by_css_selector(selector)
         return result
+
+    @classmethod
+    def _get_driver(cls):
+        return getenv('BROWSER', 'phantomjs')
+
+    @classmethod
+    def _get_platform(cls):
+        return 'ANY'
+
+    def _get_default_fixture_url(cls):
+        return None
+
+
+class HoraceTestObject(TestObject):
+
+    def _get_default_fixture_url(self):
+        return html_fixture_url

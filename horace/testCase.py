@@ -1,6 +1,6 @@
+from os import getenv
 from unittest import TestCase
 from horace.driver import Driver
-from test.config import driver, platform
 from horace.agent import Agent
 
 
@@ -8,8 +8,8 @@ class TestCaseHorace(TestCase):
 
     def setUp(self):
         agentDriver = Driver({
-            'driver': driver,
-            'platform': platform
+            'driver': getenv('BROWSER', 'phantomjs'),
+            'platform': getenv('PLATFORM', 'ANY')
         })
         self.agent = Agent(agentDriver)
 

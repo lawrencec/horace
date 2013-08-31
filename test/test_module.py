@@ -1,9 +1,9 @@
 from test.CSSTest.modules.hidden import HiddenModule
-from utils import TestObject
+from utils import HoraceTestObject
 from CSSTest.modules.paragraph import ParagraphSectionModule
 
 
-class TestModule(TestObject):
+class TestModule(HoraceTestObject):
     driver = None
 
     def test_text(self):
