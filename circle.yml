@@ -1,0 +1,4 @@
+test:
+  pre:
+    - nohup phantomjs --webdriver=5556 > /dev/null &
+    - sleep 3
